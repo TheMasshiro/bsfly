@@ -26,10 +26,10 @@ const ControlModal: FC = () => {
     const modal = useRef<HTMLIonModalElement>(null);
 
     return (
-        <IonModal ref={modal} trigger="open-control-modal" initialBreakpoint={1} breakpoints={[0, 0.5, 0.7, 1]}>
+        <IonModal ref={modal} trigger="open-control-modal" initialBreakpoint={0.75} breakpoints={[0, 0.25, 0.5, 0.75, 1]}>
             <IonHeader>
                 <IonToolbar>
-                    <IonTitle>Controls for {stage} Enclosure</IonTitle>
+                    <IonTitle>Controls: {stage} Enclosure</IonTitle>
                     <IonButtons slot="end">
                         <IonButton onClick={() => modal.current?.dismiss()}>Close</IonButton>
                     </IonButtons>
