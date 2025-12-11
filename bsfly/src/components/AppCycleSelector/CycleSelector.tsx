@@ -1,6 +1,7 @@
 import { FC, useRef, useState } from "react";
 import { useCycle } from "../../context/CycleContext";
-import { IonButton, IonChip, IonContent, IonItem, IonLabel, IonList, IonPopover } from "@ionic/react";
+import { IonChip, IonContent, IonItem, IonLabel, IonList, IonPopover } from "@ionic/react";
+import { caretForwardOutline, checkmarkOutline } from "ionicons/icons";
 
 type Stage = "Egg" | "Larva" | "Pupa" | "Adult"
 
@@ -23,17 +24,28 @@ const CycleButton: FC = () => {
                 <IonContent>
                     <IonList>
                         {stages.map((currentStage) => (
-                            <IonItem key={currentStage} button={true} detail={false} onClick={() => {
-                                popover.current?.dismiss()
-                                setStage(currentStage)
-                            }}>{currentStage} Stage
+                            <IonItem
+                                key={currentStage}
+                                button
+                                detail
+                                color={currentStage === stage ? "primary" : ""}
+                                detailIcon={
+                                    currentStage === stage
+                                        ? checkmarkOutline
+                                        : caretForwardOutline
+                                }
+                                onClick={() => {
+                                    popover.current?.dismiss();
+                                    setStage(currentStage);
+                                }}
+                            >
+                                {currentStage} Stage
                             </IonItem>
-                        ))
-                        }
+                        ))}
                     </IonList>
                 </IonContent>
             </IonPopover>
-        </IonChip>
+        </IonChip >
     )
 }
 
