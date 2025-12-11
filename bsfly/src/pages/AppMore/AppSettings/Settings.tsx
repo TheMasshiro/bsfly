@@ -1,34 +1,18 @@
-import {
-    IonBackButton,
-    IonButton,
-    IonButtons,
-    IonContent,
-    IonHeader,
-    IonIcon,
-    IonInput,
-    IonItem,
-    IonList,
-    IonListHeader,
-    IonNote,
-    IonPage,
-    IonTitle,
-    IonToolbar,
-} from '@ionic/react';
-import { hardwareChip, save } from 'ionicons/icons';
-import { FC } from 'react';
+import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList, IonPage, IonTitle, IonToolbar } from "@ionic/react";
+import { globe, hardwareChip, helpCircle, save } from "ionicons/icons";
+import { FC } from "react";
 
 const SettingsPage: FC = () => {
-
     return (
         <IonPage>
             <IonHeader class="ion-no-border">
                 <IonToolbar>
                     <IonButtons slot="start">
-                        <IonBackButton default-href="/more"></IonBackButton>
+                        <IonBackButton default-href="/more/"></IonBackButton>
                     </IonButtons>
                     <IonTitle>Settings</IonTitle>
                     <IonButtons slot="end">
-                        <IonButton>
+                        <IonButton onClick={() => console.log("Saved")}>
                             <IonIcon icon={save} slot="icon-only" />
                         </IonButton>
                     </IonButtons>
@@ -36,26 +20,25 @@ const SettingsPage: FC = () => {
             </IonHeader>
 
             <IonContent fullscreen>
-                <IonListHeader>
-                    <IonIcon icon={hardwareChip} style={{ marginRight: '8px' }} />
-                    ESP32 Configuration
-                </IonListHeader>
-                <IonList inset={true}>
+                <IonList inset>
+                    <IonItem lines="none">
+                        <IonIcon icon={hardwareChip} slot="start"></IonIcon>
+                        <IonLabel>ESP32 Configuration</IonLabel>
+                    </IonItem>
                     <IonItem>
-                        <IonInput
-                            label="ESP32 MAC Address"
-                            labelPlacement="stacked"
-                            placeholder="AA:BB:CC:DD:EE:FF"
-                        />
+                        <IonInput label="Enter Mac Address" label-placement="stacked" placeholder="AA:BB:CC:DD:EE:FF"></IonInput>
                     </IonItem>
                     <IonItem lines="none">
-                        <IonNote color="medium" style={{ fontSize: '12px' }}>
-                            Enter the MAC address of your ESP32 device
-                        </IonNote>
+                        <IonLabel color="medium">Current Address: AA:BB:CC:DD:EE:FF</IonLabel>
+                    </IonItem>
+                    <IonItem button href="https://github.com/TheMasshiro/bsfly/blob/main/README.md" target="_blank" rel="noopener noreferrer">
+                        <IonIcon icon={helpCircle} slot="start"></IonIcon>
+                        <IonLabel color="medium">How to get ESP32 Mac Address?</IonLabel>
                     </IonItem>
                 </IonList>
             </IonContent>
         </IonPage>
-    );
+    )
 }
+
 export default SettingsPage;

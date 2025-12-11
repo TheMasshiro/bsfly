@@ -91,7 +91,7 @@ const App: React.FC = () => (
                             <IonLabel>Notifications</IonLabel>
                         </IonTabButton>
 
-                        <IonTabButton tab="more" href="/more/">
+                        <IonTabButton tab="more" href="/more">
                             <IonIcon aria-hidden="true" icon={menuOutline} />
                             <IonLabel>More</IonLabel>
                         </IonTabButton>
