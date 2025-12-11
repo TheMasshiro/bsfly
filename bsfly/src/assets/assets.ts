@@ -2,7 +2,7 @@ export const sensorsData = [
   {
     name: "Photoperiod",
     value: 43200,
-    unit: " AM",
+    unit: " Hours",
   },
   {
     name: "Temperature",
