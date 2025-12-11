@@ -1,0 +1,11 @@
+.ios-card {
+  --background: #000000;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.md-card {
+  --background: #1e1e1e;
+  flex: 1;
+  overflow-y: auto;
+}
