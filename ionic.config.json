@@ -1,0 +1,8 @@
+{
+  "name": "bsfly",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite",
+  "id": "5c61a05c"
+}
