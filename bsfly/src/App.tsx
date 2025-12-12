@@ -11,7 +11,8 @@ import {
     setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { analyticsOutline, ellipse, menuOutline, notificationsCircleOutline, square, thermometerOutline, triangle } from 'ionicons/icons';
+import { analyticsOutline, menuOutline, notificationsCircleOutline, thermometerOutline } from 'ionicons/icons';
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -49,6 +50,7 @@ import NotificationsPage from './pages/AppNotifications/Notifications';
 import MorePage from './pages/AppMore/More';
 import AboutPage from './pages/AppMore/AppAbout/About';
 import SettingsPage from './pages/AppMore/AppSettings/Settings';
+import LandingPage from './pages/AppLanding/SignIn';
 
 setupIonicReact();
 
@@ -57,49 +59,62 @@ export const platform = getPlatforms();
 const App: React.FC = () => (
     <IonApp>
         <CycleProvider>
-            <IonReactRouter>
-                <IonTabs>
-                    <IonRouterOutlet>
-                        <Route exact path="/sensors" component={SensorPage} />
-                        <Route exact path="/analytics" component={AnalyticsPage} />
-                        <Route exact path="/notifications" component={NotificationsPage} />
+            <SignedIn>
+                <IonReactRouter>
+
+                    <UserButton />
+                    <IonTabs>
+                        <IonRouterOutlet>
+                            <Route exact path="/sensors" component={SensorPage} />
+                            <Route exact path="/analytics" component={AnalyticsPage} />
+                            <Route exact path="/notifications" component={NotificationsPage} />
 
 
-                        <Route exact path="/more" component={MorePage} />
-                        <Route exact path="/more/view" component={AboutPage} />
-                        <Route exact path="/more/backup" component={AboutPage} />
-                        <Route exact path="/more/settings" component={SettingsPage} />
-                        <Route exact path="/more/about" component={AboutPage} />
+                            <Route exact path="/more" component={MorePage} />
+                            <Route exact path="/more/view" component={AboutPage} />
+                            <Route exact path="/more/backup" component={AboutPage} />
+                            <Route exact path="/more/settings" component={SettingsPage} />
+                            <Route exact path="/more/about" component={AboutPage} />
 
-                        <Route exact path="/">
-                            <Redirect to="/sensors" />
-                        </Route>
-                    </IonRouterOutlet>
-                    <IonTabBar slot="bottom">
-                        <IonTabButton tab="sensors" href="/sensors">
-                            <IonIcon aria-hidden="true" icon={thermometerOutline} />
-                            <IonLabel>Sensors</IonLabel>
-                        </IonTabButton>
+                            <Route exact path="/">
+                                <Redirect to="/sensors" />
+                            </Route>
+                        </IonRouterOutlet>
+                        <IonTabBar slot="bottom">
+                            <IonTabButton tab="sensors" href="/sensors">
+                                <IonIcon aria-hidden="true" icon={thermometerOutline} />
+                                <IonLabel>Sensors</IonLabel>
+                            </IonTabButton>
 
-                        <IonTabButton tab="tab2" href="/analytics">
-                            <IonIcon aria-hidden="true" icon={analyticsOutline} />
-                            <IonLabel>Analytics</IonLabel>
-                        </IonTabButton>
+                            <IonTabButton tab="tab2" href="/analytics">
+                                <IonIcon aria-hidden="true" icon={analyticsOutline} />
+                                <IonLabel>Analytics</IonLabel>
+                            </IonTabButton>
 
-                        <IonTabButton tab="notifications" href="/notifications">
-                            <IonIcon aria-hidden="true" icon={notificationsCircleOutline} />
-                            <IonLabel>Notifications</IonLabel>
-                        </IonTabButton>
+                            <IonTabButton tab="notifications" href="/notifications">
+                                <IonIcon aria-hidden="true" icon={notificationsCircleOutline} />
+                                <IonLabel>Notifications</IonLabel>
+                            </IonTabButton>
 
-                        <IonTabButton tab="more" href="/more">
-                            <IonIcon aria-hidden="true" icon={menuOutline} />
-                            <IonLabel>More</IonLabel>
-                        </IonTabButton>
-                    </IonTabBar>
-                </IonTabs>
-            </IonReactRouter>
+                            <IonTabButton tab="more" href="/more">
+                                <IonIcon aria-hidden="true" icon={menuOutline} />
+                                <IonLabel>More</IonLabel>
+                            </IonTabButton>
+                        </IonTabBar>
+                    </IonTabs>
+                </IonReactRouter>
+            </SignedIn>
+            <SignedOut>
+                <IonReactRouter>
+                    <Route exact path="/welcome" component={LandingPage} />
+
+                    <Route exact path="/">
+                        <Redirect to="/welcome" />
+                    </Route>
+                </IonReactRouter>
+            </SignedOut>
         </CycleProvider>
-    </IonApp>
+    </IonApp >
 );
 
 export default App;
