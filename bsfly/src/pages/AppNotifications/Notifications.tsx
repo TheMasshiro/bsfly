@@ -1,5 +1,7 @@
-import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonPage, IonRefresher, IonRefresherContent, IonTitle, IonToolbar, RefresherCustomEvent } from '@ionic/react';
+import { IonButtons, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonItem, IonPage, IonRefresher, IonRefresherContent, IonTitle, IonToolbar, RefresherCustomEvent } from '@ionic/react';
 import { FC } from 'react';
+import CycleButton from '../../components/AppCycleSelector/CycleSelector';
+import { UserButton } from '@clerk/clerk-react';
 
 const NotificationsPage: FC = () => {
 
@@ -15,6 +17,14 @@ const NotificationsPage: FC = () => {
             <IonHeader>
                 <IonToolbar>
                     <IonTitle>Notifications</IonTitle>
+                    <IonButtons slot="start">
+                        <CycleButton />
+                    </IonButtons>
+                    <IonButtons slot="end">
+                        <IonItem lines="none">
+                            <UserButton />
+                        </IonItem>
+                    </IonButtons>
                 </IonToolbar>
             </IonHeader>
             <IonContent fullscreen>

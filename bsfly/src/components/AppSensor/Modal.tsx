@@ -25,6 +25,7 @@ const ControlModal: FC = () => {
     const { stage } = useCycle()
     const modal = useRef<HTMLIonModalElement>(null);
 
+
     return (
         <IonModal ref={modal} trigger="open-control-modal" initialBreakpoint={0.75} breakpoints={[0, 0.25, 0.5, 0.75, 1]}>
             <IonHeader>

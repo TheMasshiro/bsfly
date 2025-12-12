@@ -1,5 +1,5 @@
 import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList, IonPage, IonTitle, IonToolbar } from "@ionic/react";
-import { globe, hardwareChip, helpCircle, save } from "ionicons/icons";
+import { hardwareChip, helpCircle, save } from "ionicons/icons";
 import { FC } from "react";
 
 const SettingsPage: FC = () => {

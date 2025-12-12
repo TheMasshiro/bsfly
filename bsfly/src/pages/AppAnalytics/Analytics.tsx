@@ -1,10 +1,11 @@
-import { IonButtons, IonChip, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonLabel, IonPage, IonRefresher, IonRefresherContent, IonRow, IonSegment, IonSegmentButton, IonSegmentContent, IonSegmentView, IonTitle, IonToolbar, RefresherCustomEvent } from '@ionic/react';
+import { IonButtons, IonChip, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonItem, IonLabel, IonPage, IonRefresher, IonRefresherContent, IonRow, IonSegment, IonSegmentButton, IonSegmentContent, IonSegmentView, IonTitle, IonToolbar, RefresherCustomEvent } from '@ionic/react';
 import { lifecycleThresholds } from '../../config/thresholds';
 import { FC } from 'react';
 import { useCycle } from '../../context/CycleContext';
 import Graph from '../../components/AppGraph/Graphs';
 import CycleButton from '../../components/AppCycleSelector/CycleSelector';
 import { cloudOutline, thermometerOutline, waterOutline } from 'ionicons/icons';
+import { UserButton } from '@clerk/clerk-react';
 
 const AnalyticsPage: FC = () => {
     const { stage } = useCycle()
@@ -49,8 +50,13 @@ const AnalyticsPage: FC = () => {
             <IonHeader>
                 <IonToolbar>
                     <IonTitle>Analytics</IonTitle>
-                    <IonButtons slot="end">
+                    <IonButtons slot="start">
                         <CycleButton />
+                    </IonButtons>
+                    <IonButtons slot="end">
+                        <IonItem lines="none">
+                            <UserButton />
+                        </IonItem>
                     </IonButtons>
                 </IonToolbar>
             </IonHeader>

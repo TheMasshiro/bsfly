@@ -1,7 +1,8 @@
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonItem, IonLabel, IonList, IonRadio, IonRadioGroup, IonToggle, ToggleCustomEvent, useIonToast } from "@ionic/react";
-import { FC, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import "./Controls.css"
 import { platform } from "../../App";
+import { socket } from "../../services/socket/socket";
 
 
 interface ControlToggleProps {
@@ -12,15 +13,13 @@ interface ControlToggleProps {
 export const ControlToggle: FC<ControlToggleProps> = ({ description, cardTitle }) => {
     const toggleRef = useRef<HTMLIonToggleElement>(null);
 
-    const [isTouched, setIsTouched] = useState<boolean>(false);
+    const [isTouched, setIsTouched] = useState<boolean>();
     const [isValid, setIsValid] = useState<boolean | undefined>();
-    const [isChecked, setIsChecked] = useState<boolean>(true);
+    const [isChecked, setIsChecked] = useState<boolean>();
 
-    const validateToggle = (event: ToggleCustomEvent<{ checked: boolean }>) => {
-        setIsTouched(true);
-        setIsChecked(event.detail.checked);
-        setIsValid(event.detail.checked);
-    };
+    const [message, setMessage] = useState<boolean>(false)
+    const [messageReceived, setMessageReceived] = useState<boolean>(false)
+
 
     const [present] = useIonToast()
     const presentToast = (message: string, duration: number) => {
@@ -31,6 +30,25 @@ export const ControlToggle: FC<ControlToggleProps> = ({ description, cardTitle }
             mode: "ios",
             layout: "stacked",
             swipeGesture: "vertical",
+        })
+    }
+
+    const validateToggle = (event: ToggleCustomEvent<{ checked: boolean }>) => {
+        setIsTouched(true);
+        setIsChecked(event.detail.checked);
+        setIsValid(event.detail.checked);
+        const message = event.detail.checked ? `${cardTitle} turned on` : `${cardTitle} turned off`;
+        presentToast(message, 700);
+    };
+
+    const toggleSent = () => {
+        socket.emit("send_message", { message: message })
+    }
+
+    const toggleReceived = () => {
+        socket.on("received_message", (data) => {
+            setMessageReceived(data.message)
+            alert(messageReceived)
         })
     }
 
@@ -46,7 +64,13 @@ export const ControlToggle: FC<ControlToggleProps> = ({ description, cardTitle }
                         }`}
                     justify="space-between"
                     checked={isChecked}
-                    onIonChange={(event) => validateToggle(event)}
+                    onIonChange={(event) => {
+                        validateToggle(event)
+                        setMessage(event.detail.checked)
+                        toggleSent()
+                        toggleReceived()
+                        console.log(event.detail.checked)
+                    }}
                 >
                     {description}
                 </IonToggle>

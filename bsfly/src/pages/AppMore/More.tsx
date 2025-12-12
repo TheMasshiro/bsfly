@@ -1,7 +1,9 @@
-import { IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonPage, IonTitle, IonToolbar, RouterDirection, useIonRouter } from '@ionic/react';
+import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonPage, IonTitle, IonToolbar, RouterDirection, useIonRouter } from '@ionic/react';
 import './More.css';
 import { FC } from 'react';
-import { eyeOutline, informationCircleOutline, saveOutline, settingsOutline } from 'ionicons/icons';
+import { eyeOutline, informationCircleOutline, logOut, person, saveOutline, settingsOutline } from 'ionicons/icons';
+import CycleButton from '../../components/AppCycleSelector/CycleSelector';
+import { UserButton } from '@clerk/clerk-react';
 
 const MorePage: FC = () => {
     const router = useIonRouter()
@@ -41,7 +43,15 @@ const MorePage: FC = () => {
         <IonPage>
             <IonHeader>
                 <IonToolbar>
-                    <IonTitle>Menu</IonTitle>
+                    <IonTitle>More</IonTitle>
+                    <IonButtons slot="start">
+                        <CycleButton />
+                    </IonButtons>
+                    <IonButtons slot="end">
+                        <IonItem lines="none">
+                            <UserButton />
+                        </IonItem>
+                    </IonButtons>
                 </IonToolbar>
             </IonHeader>
             <IonContent fullscreen={true}>
@@ -50,7 +60,7 @@ const MorePage: FC = () => {
                         <IonTitle size="large">Menu</IonTitle>
                     </IonToolbar>
                 </IonHeader>
-                <IonList inset={true}>
+                <IonList inset>
                     {options.map((option, index) => (
                         <IonItem key={index} button onClick={() => { option.onClick() }}>
                             <IonIcon aria-hidden="true" icon={option.icon} slot="start" size="large"></IonIcon>
@@ -58,8 +68,7 @@ const MorePage: FC = () => {
                                 {option.name}
                             </IonLabel>
                         </IonItem>
-                    ))
-                    }
+                    ))}
                 </IonList>
             </IonContent>
         </IonPage >
