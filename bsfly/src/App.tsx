@@ -71,7 +71,11 @@ const App: React.FC = () => (
                             <Route exact path="/more/backup" component={AboutPage} />
                             <Route exact path="/more/settings" component={SettingsPage} />
                             <Route exact path="/more/about" component={AboutPage} />
+
                             <Route exact path="/">
+                                <Redirect to="/sensors" />
+                            </Route>
+                            <Route exact path="/welcome">
                                 <Redirect to="/sensors" />
                             </Route>
                         </IonRouterOutlet>
@@ -95,15 +99,27 @@ const App: React.FC = () => (
                         </IonTabBar>
                     </IonTabs>
                 </SignedIn>
-            </IonReactRouter>
-            <SignedOut>
-                <IonReactRouter>
+
+                <SignedOut>
                     <Route exact path="/welcome" component={LandingPage} />
-                    <Route exact path="*">
+                    <Route exact path="/">
                         <Redirect to="/welcome" />
                     </Route>
-                </IonReactRouter>
-            </SignedOut>
+                    <Route exact path="/sensors">
+                        <Redirect to="/welcome" />
+                    </Route>
+                    <Route exact path="/analytics">
+                        <Redirect to="/welcome" />
+                    </Route>
+                    <Route exact path="/notifications">
+                        <Redirect to="/welcome" />
+                    </Route>
+                    <Route exact path="/more">
+                        <Redirect to="/welcome" />
+                    </Route>
+                </SignedOut>
+
+            </IonReactRouter>
         </CycleProvider>
     </IonApp>
 );
