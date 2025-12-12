@@ -15,7 +15,7 @@ const NotificationsPage: FC = () => {
     return (
         <IonPage>
             <IonHeader>
-                <IonToolbar>
+                <IonToolbar mode="ios">
                     <IonTitle>Notifications</IonTitle>
                     <IonButtons slot="start">
                         <CycleButton />

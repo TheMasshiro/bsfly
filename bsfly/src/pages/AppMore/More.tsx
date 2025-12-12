@@ -42,7 +42,7 @@ const MorePage: FC = () => {
     return (
         <IonPage>
             <IonHeader>
-                <IonToolbar>
+                <IonToolbar mode="ios">
                     <IonTitle>More</IonTitle>
                     <IonButtons slot="start">
                         <CycleButton />

@@ -48,7 +48,7 @@ const AnalyticsPage: FC = () => {
     return (
         <IonPage>
             <IonHeader>
-                <IonToolbar>
+                <IonToolbar mode="ios">
                     <IonTitle>Analytics</IonTitle>
                     <IonButtons slot="start">
                         <CycleButton />

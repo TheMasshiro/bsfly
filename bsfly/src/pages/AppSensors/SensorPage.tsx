@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { IonButton, IonButtons, IonChip, IonCol, IonContent, IonFab, IonFabButton, IonGrid, IonHeader, IonIcon, IonItem, IonLabel, IonPage, IonRefresher, IonRefresherContent, IonRow, IonTitle, IonToolbar, RefresherCustomEvent } from "@ionic/react";
+import { IonButtons, IonChip, IonCol, IonContent, IonFab, IonFabButton, IonGrid, IonHeader, IonIcon, IonItem, IonLabel, IonPage, IonRefresher, IonRefresherContent, IonRow, IonTitle, IonToolbar, RefresherCustomEvent } from "@ionic/react";
 import CycleButton from "../../components/AppCycleSelector/CycleSelector";
 import "./Sensor.css"
 import { sensorsData } from "../../assets/assets";
 import SensorCard from "../../components/AppSensor/Sensor";
-import { optionsOutline, personCircleOutline } from "ionicons/icons";
+import { optionsOutline } from "ionicons/icons";
 import ControlModal from "../../components/AppSensor/Modal";
 import { UserButton } from "@clerk/clerk-react";
 
@@ -26,7 +26,7 @@ const SensorPage: FC = () => {
                     </IonFabButton>
                 </IonFab>
                 <IonHeader>
-                    <IonToolbar>
+                    <IonToolbar mode="ios">
                         <IonTitle>Sensors</IonTitle>
                         <IonButtons slot="start">
                             <CycleButton />
