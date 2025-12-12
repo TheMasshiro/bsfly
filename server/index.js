@@ -1,0 +1,30 @@
+import express from "express";
+import { createServer } from "http";
+import { Server } from "socket.io";
+import cors from "cors";
+
+const app = express();
+app.use(cors());
+
+const httpServer = createServer();
+
+const FRONTEND_PORT = 8100;
+const BACKEND_PORT = 5000;
+const io = new Server(httpServer, {
+  cors: {
+    origin: `http://localhost:${FRONTEND_PORT}`,
+    methods: ["GET", "POST"],
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log(`User Connected: ${socket.id}`);
+
+  socket.on("send_message", (data) => {
+    socket.broadcast.emit("received_message", data);
+  });
+});
+
+httpServer.listen(BACKEND_PORT, () => {
+  console.log(`Server is running on port ${BACKEND_PORT}`);
+});
