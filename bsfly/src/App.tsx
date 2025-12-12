@@ -59,16 +59,22 @@ export const platform = getPlatforms();
 const App: React.FC = () => (
     <IonApp>
         <CycleProvider>
-            <SignedIn>
-                <IonReactRouter>
+            <IonReactRouter>
+                <SignedOut>
+                    <IonRouterOutlet>
+                        <Route exact path="/welcome" component={LandingPage} />
+                        <Route path="*">
+                            <Redirect to="/welcome" />
+                        </Route>
+                    </IonRouterOutlet>
+                </SignedOut>
 
-                    <UserButton />
+                <SignedIn>
                     <IonTabs>
                         <IonRouterOutlet>
                             <Route exact path="/sensors" component={SensorPage} />
                             <Route exact path="/analytics" component={AnalyticsPage} />
                             <Route exact path="/notifications" component={NotificationsPage} />
-
 
                             <Route exact path="/more" component={MorePage} />
                             <Route exact path="/more/view" component={AboutPage} />
@@ -86,7 +92,7 @@ const App: React.FC = () => (
                                 <IonLabel>Sensors</IonLabel>
                             </IonTabButton>
 
-                            <IonTabButton tab="tab2" href="/analytics">
+                            <IonTabButton tab="analytics" href="/analytics">
                                 <IonIcon aria-hidden="true" icon={analyticsOutline} />
                                 <IonLabel>Analytics</IonLabel>
                             </IonTabButton>
@@ -102,19 +108,10 @@ const App: React.FC = () => (
                             </IonTabButton>
                         </IonTabBar>
                     </IonTabs>
-                </IonReactRouter>
-            </SignedIn>
-            <SignedOut>
-                <IonReactRouter>
-                    <Route exact path="/welcome" component={LandingPage} />
-
-                    <Route exact path="/">
-                        <Redirect to="/welcome" />
-                    </Route>
-                </IonReactRouter>
-            </SignedOut>
+                </SignedIn>
+            </IonReactRouter>
         </CycleProvider>
-    </IonApp >
+    </IonApp>
 );
 
 export default App;
