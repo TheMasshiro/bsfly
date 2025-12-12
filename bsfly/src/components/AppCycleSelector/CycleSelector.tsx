@@ -1,7 +1,8 @@
-import { FC, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { useCycle } from "../../context/CycleContext";
-import { IonChip, IonContent, IonItem, IonLabel, IonList, IonPopover } from "@ionic/react";
-import { caretForwardOutline, checkmarkOutline } from "ionicons/icons";
+import { IonChip, IonContent, IonIcon, IonItem, IonLabel, IonList, IonPopover } from "@ionic/react";
+import { caretForwardOutline, checkmarkOutline, ellipse } from "ionicons/icons";
+import { socket } from "../../services/socket/socket";
 
 type Stage = "Egg" | "Larva" | "Pupa" | "Adult"
 
@@ -9,6 +10,7 @@ const CycleButton: FC = () => {
     const { stage, setStage } = useCycle();
     const popover = useRef<HTMLIonPopoverElement>(null);
     const [popoverOpen, setPopoverOpen] = useState(false);
+    const [isConnected, setIsConnected] = useState(socket.connected);
 
     const stages: Array<Stage> = ["Egg", "Larva", "Pupa", "Adult"]
 
@@ -17,10 +19,26 @@ const CycleButton: FC = () => {
         setPopoverOpen(true);
     };
 
+    const setIndicator = isConnected ? "success" : "danger";
+
+    useEffect(() => {
+        const onConnect = () => setIsConnected(true);
+        const onDisconnect = () => setIsConnected(false);
+
+        socket.on("connect", onConnect);
+        socket.on("disconnect", onDisconnect);
+
+        return () => {
+            socket.off("connect", onConnect);
+            socket.off("disconnect", onDisconnect);
+        };
+    }, []);
+
     return (
-        <IonChip onClick={openPopover}>
+        <IonChip onClick={openPopover} color={setIndicator}>
+            <IonIcon icon={ellipse} color={setIndicator}></IonIcon>
             <IonLabel>{stage} Stage</IonLabel>
-            <IonPopover side="left" alignment="start" ref={popover} isOpen={popoverOpen} onDidDismiss={() => setPopoverOpen(false)}>
+            <IonPopover side="right" alignment="start" ref={popover} isOpen={popoverOpen} onDidDismiss={() => setPopoverOpen(false)}>
                 <IonContent>
                     <IonList>
                         {stages.map((currentStage) => (
