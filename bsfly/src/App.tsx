@@ -102,19 +102,12 @@ const App: React.FC = () => (
 
                 <SignedOut>
                     <Route exact path="/welcome" component={LandingPage} />
+
+                    <Route path="/(sensors|analytics|notifications|more)">
+                        <Redirect to="/welcome" />
+                    </Route>
+
                     <Route exact path="/">
-                        <Redirect to="/welcome" />
-                    </Route>
-                    <Route exact path="/sensors">
-                        <Redirect to="/welcome" />
-                    </Route>
-                    <Route exact path="/analytics">
-                        <Redirect to="/welcome" />
-                    </Route>
-                    <Route exact path="/notifications">
-                        <Redirect to="/welcome" />
-                    </Route>
-                    <Route exact path="/more">
                         <Redirect to="/welcome" />
                     </Route>
                 </SignedOut>
