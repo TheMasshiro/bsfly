@@ -60,28 +60,17 @@ const App: React.FC = () => (
     <IonApp>
         <CycleProvider>
             <IonReactRouter>
-                <SignedOut>
-                    <IonRouterOutlet>
-                        <Route exact path="/welcome" component={LandingPage} />
-                        <Route path="*">
-                            <Redirect to="/welcome" />
-                        </Route>
-                    </IonRouterOutlet>
-                </SignedOut>
-
                 <SignedIn>
                     <IonTabs>
                         <IonRouterOutlet>
                             <Route exact path="/sensors" component={SensorPage} />
                             <Route exact path="/analytics" component={AnalyticsPage} />
                             <Route exact path="/notifications" component={NotificationsPage} />
-
                             <Route exact path="/more" component={MorePage} />
                             <Route exact path="/more/view" component={AboutPage} />
                             <Route exact path="/more/backup" component={AboutPage} />
                             <Route exact path="/more/settings" component={SettingsPage} />
                             <Route exact path="/more/about" component={AboutPage} />
-
                             <Route exact path="/">
                                 <Redirect to="/sensors" />
                             </Route>
@@ -91,17 +80,14 @@ const App: React.FC = () => (
                                 <IonIcon aria-hidden="true" icon={thermometerOutline} />
                                 <IonLabel>Sensors</IonLabel>
                             </IonTabButton>
-
                             <IonTabButton tab="analytics" href="/analytics">
                                 <IonIcon aria-hidden="true" icon={analyticsOutline} />
                                 <IonLabel>Analytics</IonLabel>
                             </IonTabButton>
-
                             <IonTabButton tab="notifications" href="/notifications">
                                 <IonIcon aria-hidden="true" icon={notificationsCircleOutline} />
                                 <IonLabel>Notifications</IonLabel>
                             </IonTabButton>
-
                             <IonTabButton tab="more" href="/more">
                                 <IonIcon aria-hidden="true" icon={menuOutline} />
                                 <IonLabel>More</IonLabel>
@@ -110,6 +96,14 @@ const App: React.FC = () => (
                     </IonTabs>
                 </SignedIn>
             </IonReactRouter>
+            <SignedOut>
+                <IonReactRouter>
+                    <Route exact path="/welcome" component={LandingPage} />
+                    <Route exact path="*">
+                        <Redirect to="/welcome" />
+                    </Route>
+                </IonReactRouter>
+            </SignedOut>
         </CycleProvider>
     </IonApp>
 );
