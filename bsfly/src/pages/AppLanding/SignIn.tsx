@@ -8,104 +8,115 @@ import {
     IonRow,
     IonCol,
     IonCard,
-    IonCardHeader,
-    IonCardTitle,
     IonCardContent,
-    IonIcon,
-    IonHeader,
-    IonToolbar,
-    IonTitle
+    IonIcon
 } from "@ionic/react";
-import { thermometerOutline, waterOutline, pulseOutline, leafOutline } from "ionicons/icons";
+import { thermometerOutline, waterOutline, pulseOutline, leafOutline, bugOutline } from "ionicons/icons";
 import { FC } from "react";
 
 const LandingPage: FC = () => {
     return (
         <IonPage>
-            <IonHeader>
-                <IonToolbar color="primary">
-                    <IonTitle>BSFly Monitoring</IonTitle>
-                </IonToolbar>
-            </IonHeader>
-
-            <IonContent className="ion-padding">
+            <IonContent className="ion-padding" fullscreen>
                 <IonGrid>
-                    <IonRow className="ion-justify-content-center ion-margin-top">
-                        <IonCol size="12" sizeMd="8" sizeLg="6" className="ion-text-center">
-                            <IonText color="primary">
-                                <h1>Black Soldier Fly Monitoring System</h1>
+                    <IonRow className="ion-justify-content-center ion-align-items-center">
+                        <IonCol size="12" sizeMd="8" sizeLg="5" className="ion-text-center">
+                            <IonIcon icon={bugOutline} color="success" size="large" />
+
+                            <IonText>
+                                <h1>
+                                    <div>Your gateway</div>
+                                    <div>to  <IonText color="success">BSFly</IonText></div>
+                                    <div>monitoring</div>
+                                </h1>
                             </IonText>
-                            <IonText color="medium">
-                                <p>Welcome! Sign in to access your dashboard and monitor your farm in real-time.</p>
+
+                            <IonText>
+                                <p>Monitor
+                                    <IonText color="danger"> temperature</IonText>,
+                                    <IonText color="primary"> humidity</IonText>,
+                                    <IonText color="success"> substrate moisture</IonText>,
+                                    and
+                                    <IonText color="warning"> ammonia</IonText>
+                                    <IonText> in real-time.</IonText>
+                                </p>
                             </IonText>
+
+                            <IonText>
+                                <p>Join <strong>farmers</strong> today.</p>
+                            </IonText>
+                        </IonCol>
+                    </IonRow>
+
+                    <IonRow className="ion-justify-content-center">
+                        <IonCol size="12" sizeMd="10" sizeLg="8">
+                            <IonRow>
+                                <IonCol size="6" sizeMd="3">
+                                    <IonCard>
+                                        <IonCardContent className="ion-text-center">
+                                            <IonIcon icon={thermometerOutline} color="danger" size="large" className="ion-margin-bottom" />
+                                            <IonText color="danger">
+                                                <h2>Temperature</h2>
+                                            </IonText>
+                                            <IonText color="medium">
+                                                <p>Monitor temperature</p>
+                                            </IonText>
+                                        </IonCardContent>
+                                    </IonCard>
+                                </IonCol>
+
+                                <IonCol size="6" sizeMd="3">
+                                    <IonCard>
+                                        <IonCardContent className="ion-text-center">
+                                            <IonIcon icon={waterOutline} color="primary" size="large" className="ion-margin-bottom" />
+                                            <IonText color="primary">
+                                                <h2>Humidity</h2>
+                                            </IonText>
+                                            <IonText color="medium">
+                                                <p>Track humidity</p>
+                                            </IonText>
+                                        </IonCardContent>
+                                    </IonCard>
+                                </IonCol>
+
+                                <IonCol size="6" sizeMd="3">
+                                    <IonCard>
+                                        <IonCardContent className="ion-text-center">
+                                            <IonIcon icon={leafOutline} color="success" size="large" className="ion-margin-bottom" />
+                                            <IonText color="success">
+                                                <h2>Substrate</h2>
+                                            </IonText>
+                                            <IonText color="medium">
+                                                <p>Track moisture</p>
+                                            </IonText>
+                                        </IonCardContent>
+                                    </IonCard>
+                                </IonCol>
+
+                                <IonCol size="6" sizeMd="3">
+                                    <IonCard>
+                                        <IonCardContent className="ion-text-center">
+                                            <IonIcon icon={pulseOutline} color="warning" size="large" className="ion-margin-bottom" />
+                                            <IonText color="warning">
+                                                <h2>Ammonia</h2>
+                                            </IonText>
+                                            <IonText color="medium">
+                                                <p>Monitor air quality</p>
+                                            </IonText>
+                                        </IonCardContent>
+                                    </IonCard>
+                                </IonCol>
+                            </IonRow>
                         </IonCol>
                     </IonRow>
 
                     <IonRow className="ion-justify-content-center ion-margin-top">
                         <IonCol size="12" sizeMd="6" sizeLg="4">
-                            <SignInButton mode="modal">
-                                <IonButton expand="block" size="large" color="primary">
+                            <SignInButton mode="redirect">
+                                <IonButton expand="block" size="large" color="success" strong>
                                     SIGN IN
                                 </IonButton>
                             </SignInButton>
-                        </IonCol>
-                    </IonRow>
-
-                    <IonRow className="ion-margin-top">
-                        <IonCol size="12" sizeMd="6" sizeLg="3">
-                            <IonCard>
-                                <IonCardHeader className="ion-text-center">
-                                    <IonIcon icon={thermometerOutline} color="danger" size="large" />
-                                    <IonCardTitle>Temperature</IonCardTitle>
-                                </IonCardHeader>
-                                <IonCardContent className="ion-text-center">
-                                    <IonText color="medium">
-                                        Monitor optimal temperature ranges
-                                    </IonText>
-                                </IonCardContent>
-                            </IonCard>
-                        </IonCol>
-
-                        <IonCol size="12" sizeMd="6" sizeLg="3">
-                            <IonCard>
-                                <IonCardHeader className="ion-text-center">
-                                    <IonIcon icon={waterOutline} color="primary" size="large" />
-                                    <IonCardTitle>Humidity</IonCardTitle>
-                                </IonCardHeader>
-                                <IonCardContent className="ion-text-center">
-                                    <IonText color="medium">
-                                        Track moisture levels in real-time
-                                    </IonText>
-                                </IonCardContent>
-                            </IonCard>
-                        </IonCol>
-
-                        <IonCol size="12" sizeMd="6" sizeLg="3">
-                            <IonCard>
-                                <IonCardHeader className="ion-text-center">
-                                    <IonIcon icon={pulseOutline} color="warning" size="large" />
-                                    <IonCardTitle>Ammonia</IonCardTitle>
-                                </IonCardHeader>
-                                <IonCardContent className="ion-text-center">
-                                    <IonText color="medium">
-                                        Monitor air quality and ammonia
-                                    </IonText>
-                                </IonCardContent>
-                            </IonCard>
-                        </IonCol>
-
-                        <IonCol size="12" sizeMd="6" sizeLg="3">
-                            <IonCard>
-                                <IonCardHeader className="ion-text-center">
-                                    <IonIcon icon={leafOutline} color="success" size="large" />
-                                    <IonCardTitle>Substrate</IonCardTitle>
-                                </IonCardHeader>
-                                <IonCardContent className="ion-text-center">
-                                    <IonText color="medium">
-                                        Track substrate moisture levels
-                                    </IonText>
-                                </IonCardContent>
-                            </IonCard>
                         </IonCol>
                     </IonRow>
                 </IonGrid>
