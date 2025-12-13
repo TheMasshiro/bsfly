@@ -1,43 +1,12 @@
-import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonPage, IonTitle, IonToolbar, RouterDirection, useIonRouter } from '@ionic/react';
+import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonPage, IonTitle, IonToolbar, useIonRouter } from '@ionic/react';
 import './More.css';
 import { FC } from 'react';
-import { eyeOutline, informationCircleOutline, logOut, person, saveOutline, settingsOutline } from 'ionicons/icons';
+import { eyeOutline, informationCircleOutline, saveOutline, settingsOutline } from 'ionicons/icons';
 import CycleButton from '../../components/AppCycleSelector/CycleSelector';
 import { UserButton } from '@clerk/clerk-react';
 
 const MorePage: FC = () => {
     const router = useIonRouter()
-    const dynamicNavigate = (path: string, direction: RouterDirection) => {
-        const action = direction === "forward" ? "push" : "pop";
-        router.push(path, direction, action)
-    }
-
-    const options = [
-        {
-            name: "View Data",
-            body: "View Backed Up Data",
-            icon: eyeOutline,
-            onClick: () => console.log("View Data Clicked")
-        },
-        {
-            name: "Backup Data",
-            body: "Manually Backup Data (Will overrite last backed up data",
-            icon: saveOutline,
-            onClick: () => console.log("Backup Data Clicked")
-        },
-        {
-            name: "Settings",
-            body: "Open settings",
-            icon: settingsOutline,
-            onClick: () => dynamicNavigate("/more/settings", "forward")
-        },
-        {
-            name: "About",
-            body: "About BSFly",
-            icon: informationCircleOutline,
-            onClick: () => dynamicNavigate("/more/about", "forward")
-        },
-    ]
 
     return (
         <IonPage>
@@ -57,18 +26,42 @@ const MorePage: FC = () => {
             <IonContent fullscreen={true}>
                 <IonHeader collapse="condense">
                     <IonToolbar>
-                        <IonTitle size="large">Menu</IonTitle>
+                        <IonTitle size="large">More</IonTitle>
                     </IonToolbar>
                 </IonHeader>
-                <IonList inset>
-                    {options.map((option, index) => (
-                        <IonItem key={index} button onClick={() => { option.onClick() }}>
-                            <IonIcon aria-hidden="true" icon={option.icon} slot="start" size="large"></IonIcon>
-                            <IonLabel>
-                                {option.name}
-                            </IonLabel>
-                        </IonItem>
-                    ))}
+
+                <IonList inset className="ion-margin-top">
+                    <IonItem button detail onClick={() => console.log("View Data Clicked")}>
+                        <IonIcon aria-hidden="true" icon={eyeOutline} slot="start" color="primary"></IonIcon>
+                        <IonLabel>
+                            <h2>View Data</h2>
+                            <p>View Backed Up Data</p>
+                        </IonLabel>
+                    </IonItem>
+                    <IonItem button detail onClick={() => console.log("Backup Data Clicked")}>
+                        <IonIcon aria-hidden="true" icon={saveOutline} slot="start" color="success"></IonIcon>
+                        <IonLabel>
+                            <h2>Backup Data</h2>
+                            <p>Manually backup data</p>
+                        </IonLabel>
+                    </IonItem>
+                </IonList>
+
+                <IonList inset className="ion-margin-top">
+                    <IonItem button detail onClick={() => router.push("/more/settings")}>
+                        <IonIcon aria-hidden="true" icon={settingsOutline} slot="start" color="medium"></IonIcon>
+                        <IonLabel>
+                            <h2>Settings</h2>
+                            <p>Open settings</p>
+                        </IonLabel>
+                    </IonItem>
+                    <IonItem button detail onClick={() => router.push("/more/about")}>
+                        <IonIcon aria-hidden="true" icon={informationCircleOutline} slot="start" color="medium"></IonIcon>
+                        <IonLabel>
+                            <h2>About</h2>
+                            <p>About BSFly</p>
+                        </IonLabel>
+                    </IonItem>
                 </IonList>
             </IonContent>
         </IonPage >

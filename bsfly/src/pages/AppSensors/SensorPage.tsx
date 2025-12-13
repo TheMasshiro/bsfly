@@ -20,7 +20,7 @@ const SensorPage: FC = () => {
         <>
             <IonPage>
                 <IonFab slot="fixed" vertical="bottom" horizontal="end">
-                    <IonFabButton id="open-control-modal">
+                    <IonFabButton id="open-control-modal" color="success">
                         <IonIcon icon={optionsOutline}></IonIcon>
                         <ControlModal></ControlModal>
                     </IonFabButton>
